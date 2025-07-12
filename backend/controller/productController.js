@@ -1,6 +1,6 @@
 import Product from "../models/productModel.js";
 import HandleError from "../utils/handleError.js";
-
+import handleAsyncError from "../../middleware/handleAsyncError.js";
 // Create Product
 export const createProducts = async (req, res) => {
  
@@ -27,7 +27,7 @@ export const getSingleProduct = async (req, res,next) => {
 
     const product = await Product.findById(req.params.id);
      if (!product) {
-      return next (new HandleError("Product Node Found",404))
+      return next (new HandleError("Product Node Found",404));
     }
 
     res.status(200).json({
