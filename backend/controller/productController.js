@@ -20,16 +20,17 @@ export const createProducts = handleAsyncError(async (req, res,next) => {
 });
 
 // Get All Products
-export const getAllProducts = handleAsyncError(async (req, res,next) => {
- 
-  const apiFunctionality= new APIFunctionality(Product.find(),req.query);
-  console.log(apiFunctionality);
-    // const products = await Product.find();
-    // res.status(200).json({
-    //   success: true,
-    //   products
-    // })
+export const getAllProducts = handleAsyncError(async (req, res, next) => {
+  const apiFunctionality = new APIFunctionality(Product.find(), req.query).search();
+  const products = await apiFunctionality.query;
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
 });
+
+
 
 // Get Single Product
 export const getSingleProduct = handleAsyncError(async (req, res,next) => {
